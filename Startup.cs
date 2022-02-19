@@ -2,12 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ezCloth.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using ezCloth.Entities;
+using Microsoft.AspNetCore.Identity;
+using ezCloth.Helpers;
 
 namespace ezCloth
 {
@@ -22,6 +27,21 @@ namespace ezCloth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DatabaseContext>(options =>
+            {
+                options.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
+            });
+            // add automapper to service
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+            // Add Identity User
+            services.AddIdentity<SystemUsers, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = false;
+            }).AddEntityFrameworkStores<DatabaseContext>();
+
+            services.AddAuthentication();
+
             services.AddControllersWithViews();
         }
 
@@ -42,7 +62,7 @@ namespace ezCloth
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication(); // UseAuthentication must come first before Authorization;
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
