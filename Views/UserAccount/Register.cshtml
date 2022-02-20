@@ -1,4 +1,5 @@
-﻿@model ezCloth.DTOs.RegisterDto;
+﻿
+@model ezCloth.DTOs.RegisterDto;
 
 
 <div class="container mt-5">
@@ -30,6 +31,15 @@
                     <span asp-validation-for="@Model.Password" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
+                    <select asp-for="@Model.UserRole" class="form-select">
+                        <option>--select--</option>
+                        <option>Administrator</option>
+                        <option>Seller</option>
+                        <option>Individual</option>
+                    </select>
+
+                </div>
+                <div class="mb-3">
                     <button asp-controller="UserAccount" asp-action="Register" type="submit" class="btn btn-primary">Register</button>
                 </div>
             </form>
@@ -37,3 +47,8 @@
     </div>
 
 </div>
+
+<script>
+    var 
+
+</script>

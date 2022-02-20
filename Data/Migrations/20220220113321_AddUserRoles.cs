@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ezCloth.Data.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class AddUserRoles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -153,6 +153,21 @@ namespace ezCloth.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "e61a986a-db8f-4ff7-87b4-306cffd46970", "8e2af64f-34ef-4b46-946b-1718a90eb2e4", "Administrator", "ADMINISTRATOR" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "64e85d2d-6119-4857-b43a-4f44ca2c7773", "8a3edb0f-89ff-4a92-ae09-acb9bdb7a802", "Individual", "INDIVIDUAL" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "2c0e1391-2d72-49b5-8565-d91a199b268e", "6baf8316-1e12-4fca-82d0-049f835065ea", "Seller", "SELLER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

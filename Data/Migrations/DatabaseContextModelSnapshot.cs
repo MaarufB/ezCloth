@@ -44,6 +44,29 @@ namespace ezCloth.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e61a986a-db8f-4ff7-87b4-306cffd46970",
+                            ConcurrencyStamp = "8e2af64f-34ef-4b46-946b-1718a90eb2e4",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "64e85d2d-6119-4857-b43a-4f44ca2c7773",
+                            ConcurrencyStamp = "8a3edb0f-89ff-4a92-ae09-acb9bdb7a802",
+                            Name = "Individual",
+                            NormalizedName = "INDIVIDUAL"
+                        },
+                        new
+                        {
+                            Id = "2c0e1391-2d72-49b5-8565-d91a199b268e",
+                            ConcurrencyStamp = "6baf8316-1e12-4fca-82d0-049f835065ea",
+                            Name = "Seller",
+                            NormalizedName = "SELLER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

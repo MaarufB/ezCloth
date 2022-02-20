@@ -16,5 +16,6 @@ namespace ezCloth.DTOs
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        public string UserRole{ get; set; }
     }
 }

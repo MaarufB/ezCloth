@@ -10,6 +10,7 @@ using ezCloth.Data;
 using ezCloth.DTOs;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ezCloth.Controllers
 {
@@ -17,23 +18,44 @@ namespace ezCloth.Controllers
     {
         private readonly UserManager<SystemUsers> _userManager;
         private readonly SignInManager<SystemUsers> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly DatabaseContext _context;
         private readonly IMapper _mapper;
 
         public UserAccountController(DatabaseContext context, 
                                      UserManager<SystemUsers> userManager,
                                      SignInManager<SystemUsers> signInManager,
+                                     RoleManager<IdentityRole> roleManager,
                                      IMapper mapper)
 
         {
             _mapper = mapper;
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
         }
         public IActionResult Register()
         {
+            var roles = _roleManager.Roles.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.ToString()
+            });
+
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetRoles()
+        {
+            var roles = _roleManager.Roles.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.ToString()
+            });
+
+            return await Task.Run(() => Json(new { data = roles}));
         }
 
         [HttpPost]
@@ -48,6 +70,12 @@ namespace ezCloth.Controllers
 
                 if (result.Succeeded)
                 {
+                    if (registerDto.UserRole.ToLower() == "--select--")
+                    {
+                        await _userManager.AddToRoleAsync(user, "INDIVIDUAL");
+                    }
+                    else await _userManager.AddToRoleAsync(user, registerDto.UserRole.ToUpper());
+
                     await _signInManager.SignInAsync(user, false);
                     return await Task.Run(() => RedirectToAction("Index","Home"));
                 }
