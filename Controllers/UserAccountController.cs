@@ -20,8 +20,6 @@ namespace ezCloth.Controllers
         private readonly DatabaseContext _context;
         private readonly IMapper _mapper;
 
-        [BindProperty]
-        public SystemUsers systemUsers { get; set; }
         public UserAccountController(DatabaseContext context, 
                                      UserManager<SystemUsers> userManager,
                                      SignInManager<SystemUsers> signInManager,
@@ -67,22 +65,29 @@ namespace ezCloth.Controllers
         {
             return await Task.Run(() => View());
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginUser)
         {
-            var user = _mapper.Map<SystemUsers>(loginUser);
+            var user = _mapper.Map<LoginDto>(loginUser);
             if(ModelState.IsValid)
             {
-                var identityResult = await _signInManager.PasswordSignInAsync(user.Email, loginUser.Password, user.EmailConfirmed=false, false);
-                if(identityResult.Succeeded)
+                var identityResult = await _signInManager.PasswordSignInAsync(user.Email, loginUser.Password, false, false);
+                if (identityResult.Succeeded)
                 {
                     return await Task.Run(() => RedirectToAction("Index", "Home"));
                 }
+                else return await Task.Run(() => BadRequest());
 
             }
 
+            return await Task.Run(() => RedirectToAction("Login", "UserAccount"));
+        }
 
-            return await Task.Run(() => RedirectToAction("Index", "Home"));
+        public IActionResult Logout(string emptyr=null)
+        {
+
+            return View();
         }
 
         [HttpPost]
@@ -92,7 +97,7 @@ namespace ezCloth.Controllers
 
             return await Task.Run(() => RedirectToAction("Login", "UserAccount"));
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> DontLogout()
         {

@@ -14,7 +14,7 @@ namespace ezCloth.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<LoginDto, SystemUsers>();
+            CreateMap<RegisterDto, SystemUsers>();
 
         }
     }
