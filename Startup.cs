@@ -69,9 +69,15 @@ namespace ezCloth
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+                endpoints.MapAreaControllerRoute(
                     name: "Customer",
+                    areaName:"Customer",
                     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
                     );
                 endpoints.MapRazorPages();
             });

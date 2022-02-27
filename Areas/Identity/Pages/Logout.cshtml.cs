@@ -15,6 +15,17 @@ namespace ezCloth.Areas.Pages
 {
     public class LogoutModel : PageModel
     {
-        
+        private readonly SignInManager<SystemUsers> _signInManager;
+        public LogoutModel(SignInManager<SystemUsers> signInManager)
+        {
+            _signInManager = signInManager;
+        }   
+
+        public async Task<IActionResult> OnPost()
+        {
+            await _signInManager.SignOutAsync();
+
+            return await Task.Run(() => RedirectToPage("Login"));
+        }
     }
 }

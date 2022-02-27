@@ -165,3 +165,4 @@ D:\My_Files\SofwareCareerPath\Dotnet Development\ezCloth\obj\Debug\net5.0\Razor\
 D:\My_Files\SofwareCareerPath\Dotnet Development\ezCloth\obj\Debug\net5.0\Razor\Areas\Customer\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 D:\My_Files\SofwareCareerPath\Dotnet Development\ezCloth\obj\Debug\net5.0\Razor\Areas\Identity\_ViewImports.cshtml.g.cs
 D:\My_Files\SofwareCareerPath\Dotnet Development\ezCloth\obj\Debug\net5.0\Razor\Areas\Identity\_ViewStart.cshtml.g.cs
+D:\My_Files\SofwareCareerPath\Dotnet Development\ezCloth\obj\Debug\net5.0\ezCloth.csproj.AssemblyReference.cache
