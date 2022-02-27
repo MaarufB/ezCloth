@@ -26,22 +26,22 @@
                     {
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" 
-                                   asp-area="" 
-                                   asp-controller="Home" 
+                                <a class="nav-link text-dark"
+                                   asp-area=""
+                                   asp-controller="Home"
                                    asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" 
-                                   asp-area="" 
-                                   asp-controller="Home" 
+                                <a class="nav-link text-dark"
+                                   asp-area=""
+                                   asp-controller="Home"
                                    asp-action="Privacy">Privacy</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav d-flex justify-content-end">
                             <li class="nav-item">
-                                <a class="btn btn-primary" 
-                                   asp-area="" 
+                                <a class="btn btn-primary"
+                                   asp-area=""
                                    asp-controller="UserAccount"
                                    asp-action="Logout">Logout</a>
                             </li>
@@ -49,20 +49,35 @@
                     }
                     else
                     {
+
+
                         <ul class="navbar-nav d-flex justify-content-end flex-grow-1">
                             <li class="nav-item">
                                 <a class="btn btn-primary"
-                                   asp-area=""
-                                   asp-controller="UserAccount"
-                                   asp-action="Login">Login</a>
+                                   asp-area="Identity"
+                                   asp-page="/Login">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn"
-                                   asp-area=""
-                                   asp-controller="UserAccount"
-                                   asp-action="Register">Register</a>
+                                   asp-area="Identity"
+                                   asp-page="/Register">Register</a>
                             </li>
                         </ul>
+
+                        @*<ul class="navbar-nav d-flex justify-content-end flex-grow-1">
+                <li class="nav-item">
+                    <a class="btn btn-primary"
+                       asp-area=""
+                       asp-controller="UserAccount"
+                       asp-action="Login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn"
+                       asp-area=""
+                       asp-controller="UserAccount"
+                       asp-action="Register">Register</a>
+                </li>
+            </ul>*@
                     }
                 </div>
             </div>
